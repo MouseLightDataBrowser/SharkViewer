@@ -40,6 +40,7 @@ var SharkViewer = function (parameters) {
         0xfd2c4d,
         0xc9c9c9,
     ];
+    this.radius_scale_factor = 1;
     this.metadata = false;
     this.centerpoint = null;
     this.brainboundingbox = null;
@@ -303,14 +304,14 @@ SharkViewer.prototype.createNeuron = function (swc_json, color = undefined) {
                             node_color = new THREE.Color(color);
                         }
                         var ix2 = coneGeom.vertices.push(cone.child.vertex);
-                        coneAttributes.radius.value.push(cone.child.radius);
+                        coneAttributes.radius.value.push(cone.child.radius * this.radius_scale_factor);
                         coneAttributes.typeColor.value.push(node_color);
                         node_color = cone.parent.color;
                         if (color) {
                             node_color = new THREE.Color(color);
                         }
                         coneGeom.vertices.push(cone.parent.vertex);
-                        coneAttributes.radius.value.push(cone.parent.radius);
+                        coneAttributes.radius.value.push(cone.parent.radius * this.radius_scale_factor);
                         coneAttributes.typeColor.value.push(node_color);
 
                         // Paint two triangles to make a cone-imposter quadrilateral
